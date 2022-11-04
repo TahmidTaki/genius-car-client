@@ -1,17 +1,27 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../../assets/logo.svg";
+import { authContext } from "../../../Contexts/AuthProvider/AuthProvider";
 
 const Header = () => {
+  const { user } = useContext(authContext);
   const menuItems = (
     <>
       <li className="font-semibold">
         <Link className="font-semibold" to="/">
           Home
         </Link>
-        <Link className="font-semibold" to="/login">
-          Login
-        </Link>
+      </li>
+      <li className="font-semibold">
+        {user?.email ? (
+          <Link className="font-semibold" to="/orders">
+            Orders
+          </Link>
+        ) : (
+          <Link className="font-semibold" to="/login">
+            Login
+          </Link>
+        )}
       </li>
     </>
   );
